@@ -89,7 +89,7 @@ then:
 * @AutoCleanup - allows a named cleaning up/closing method to be automatically called by Spock on a field
 * @FailsWith - makes a feature pass only if it raises a certain exception and it’s uncaught
 
-###Make your own extensions
+####Make your own extensions
 
 Follow Luke Daley's guide at http://ldaley.com/post/971946675/annotation-driven-extensions-with-spock
 
@@ -177,3 +177,7 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 ##Remote Control
 
 ##Geb
+
+###Configuring WebDriver
+
+See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
