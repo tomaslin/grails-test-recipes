@@ -79,8 +79,19 @@ where:
    [name, fingers, nombre] = [ [ 'one', 'two'], [1,2], ['uno', 'dos'] ].combinations()
 ```
 
-This will test:
-[[one, 1, uno], [two, 1, uno], [one, 2, uno], [two, 2, uno], [one, 1, dos], [two, 1, dos], [one, 2, dos], [two, 2, dos]]
+This is equivalent to:
+```groovy
+where:
+   name  | fingers | nombre
+   'one' |    1    | 'uno'
+   'two' |    1    | 'uno'
+   'one' |    2    | 'uno'
+   'two' |    2    | 'uno'
+   'one' |    1    | 'dos'
+   'two' |    1    | 'dos'
+   'one' |    2    | 'dos'
+   'two' |    2    | 'dos'
+```
 
 ##Remote Control
 
