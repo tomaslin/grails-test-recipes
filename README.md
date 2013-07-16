@@ -70,6 +70,20 @@ where:
   'cows'       | _
 ```
 
+####Assign variables
+```groovy
+where:
+   a = 'cars'
+```
+
+####Data Pipes
+```groovy
+where:
+   a << ['one', 'two', 'three' ]
+```
+
+This will run each value of the pipe at each iteration - resulting in three tests.
+
 ####Combinations 
 
 Creates a data table with all 8 possible combinations: 
