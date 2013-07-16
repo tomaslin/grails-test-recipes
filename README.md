@@ -51,6 +51,8 @@ open test-report
 
 ##Spock 
 
+( Mostly from: http://docs.spockframework.org/en/latest/data_driven_testing.html )
+
 ####Compare with previous value using old()
 
 ```groovy
@@ -60,14 +62,33 @@ then:
   value == old( value ) * 30
 ```
 
+####Changing label formatting in IntelliJ Idea
+
+####Useful Extensions
+
+@Unroll - splits out features into separate tests
+@Ignore - do not run this test
+@Ignore(reason = "I am too old for this shit") - can have a reason
+@IgnoreRest - only run this test
+@IgnoreIf({ os == 'windows' }) 
+@Require({ payscale == 'jedi' }) 
+
 ###Data Tables
 
 ####One column where clauses
 ```groovy
 where:
-  MyCollection | _
-  'rabbit'     | _
-  'cows'       | _
+  animal   | _
+  'rabbit' | _
+  'cow'    | _
+```
+
+####Double Pipe to separate input from output
+```groovy
+where:
+  english  | plural || spanish 
+  'rabbit' | true   || 'conejos'
+  'cow'    | false  || 'vaca'
 ```
 
 ####Assign variables
@@ -84,13 +105,26 @@ where:
 
 This will run each value of the pipe at each iteration - resulting in three tests.
 
+####Multiple assignments
+```groovy
+where:
+   [a, b, c] << [ [ 1, 2, 3 ],
+                  [ 1, 3, 5 ] ]
+```
+
+####Skip values
+```groovy
+where:
+   [a, _, c] << [ [ 1, 2, 3 ], [ 1, 3, 5 ] ]
+```
+
 ####Combinations 
 
 Creates a data table with all 8 possible combinations: 
 
 ```groovy
 where:
-   [name, fingers, nombre] = [ [ 'one', 'two'], [1,2], ['uno', 'dos'] ].combinations()
+   [name, fingers, nombre] << [ [ 'one', 'two'], [1,2], ['uno', 'dos'] ].combinations()
 ```
 
 This is equivalent to:
@@ -106,6 +140,19 @@ where:
    'one' |    2    | 'dos'
    'two' |    2    | 'dos'
 ```
+
+####Can combine different types of data table format
+```groovy
+where:
+   name  | nombre
+   'one' | 'uno'
+
+   properName = name.capitalize()
+   postCode << ['90210', '90222']
+```
+
+IntelliJ won't recognize mixed format so you have to do the data table, format it and then the other values.
+
 
 ##Remote Control
 
