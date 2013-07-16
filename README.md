@@ -1,4 +1,4 @@
-#Grails Testing: Cookbook
+#Recipes for Testing Grails
 
 ##The Command Line
 
@@ -73,6 +73,8 @@ then:
 
 ####Changing label formatting in IntelliJ Idea
 
+###Extensions
+
 ####Useful Extensions
 
 * @Unroll - splits out features into separate tests
@@ -81,6 +83,15 @@ then:
 * @IgnoreRest - only run this test
 * @IgnoreIf({ os == 'windows' }) 
 * @Require({ payscale == 'jedi' }) 
+* @Stepwise - causes each feature method to be executed in declaration order and any after the first failure to be ignored (i.e. story mode)
+* @Shared - makes a field available to all tests / where clauses
+* @Timeout - causes a method to fail if it takes to long (and will interrupt it if it does take too long)
+* @AutoCleanup - allows a named cleaning up/closing method to be automatically called by Spock on a field
+* @FailsWith - makes a feature pass only if it raises a certain exception and it’s uncaught
+
+###Make your own extensions
+
+Follow Luke Daley's guide at http://ldaley.com/post/971946675/annotation-driven-extensions-with-spock
 
 ###Data Tables
 
