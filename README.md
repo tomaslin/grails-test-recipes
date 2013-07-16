@@ -76,7 +76,7 @@ Create a data table with all 9 possible combinations
 
 ```groovy
 where:
-   [name, fingers, nombre] = [ [ 'one', 'two'], [1,2], ['uno', 'dos'].combinations()
+   [name, fingers, nombre] = [ [ 'one', 'two'], [1,2], ['uno', 'dos'] ].combinations()
 ```
 
 ##Remote Control
