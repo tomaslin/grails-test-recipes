@@ -49,6 +49,15 @@ restart-daemon
 open test-report
 ```
 
+####Configuring the test daemon
+The test deamon in the grails shell exists in 2.3.x branches to make running of the tests faster. This is similar to the gradle daemon. 
+
+To disable this functionality, modify the BuildConfig.groovy file and change the last attribute of this map to false
+
+```
+    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+```
+
 ##Spock 
 
 ( Mostly from: http://docs.spockframework.org/en/latest )
