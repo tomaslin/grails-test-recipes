@@ -73,6 +73,10 @@ then:
 
 ####Changing label formatting in IntelliJ Idea
 
+####Generate a HTML report based on labels
+
+Project on github - https://github.com/chanwit/spock-report-html
+
 ###Extensions
 
 ####Useful Extensions
