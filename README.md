@@ -66,12 +66,12 @@ then:
 
 ####Useful Extensions
 
-@Unroll - splits out features into separate tests
-@Ignore - do not run this test
-@Ignore(reason = "I am too old for this shit") - can have a reason
-@IgnoreRest - only run this test
-@IgnoreIf({ os == 'windows' }) 
-@Require({ payscale == 'jedi' }) 
+* @Unroll - splits out features into separate tests
+* @Ignore - do not run this test
+* @Ignore(reason = "I am too old for this shit") - can have a reason
+* @IgnoreRest - only run this test
+* @IgnoreIf({ os == 'windows' }) 
+* @Require({ payscale == 'jedi' }) 
 
 ###Data Tables
 
