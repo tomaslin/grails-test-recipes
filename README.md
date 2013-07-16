@@ -72,7 +72,7 @@ where:
 
 ####Combinations 
 
-Creates a data table with all 9 possible combinations: 
+Creates a data table with all 8 possible combinations: 
 
 ```groovy
 where:
