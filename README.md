@@ -51,7 +51,7 @@ open test-report
 
 ##Spock 
 
-( Mostly from: http://docs.spockframework.org/en/latest/data_driven_testing.html )
+( Mostly from: http://docs.spockframework.org/en/latest )
 
 ####Compare with previous value using old()
 
