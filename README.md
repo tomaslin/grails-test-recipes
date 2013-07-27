@@ -257,7 +257,6 @@ where:
 
 IntelliJ won't recognize mixed format so you have to do the data table, format it and then the other values.
 
-
 ##Remote Control
 
 ##Betamax
@@ -303,3 +302,12 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 ####Configuring WebDriver
 
 See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
+
+####Presentations on Geb
+
+* Luke Daley - The evolution of Geb - http://skillsmatter.com/podcast/home/the-evolution-of-an-open-source-projects-build-automation
+* Luke Daley - Productive Grails functional testing - http://skillsmatter.com/podcast/home/productive-grails-functional-testing
+* Luke Daley - Very Groovy Browser Automation - http://www.youtube.com/watch?v=T2qXCBT_QBs 
+* Tomas Lin - Testing Dynamic Pages with Geb - http://skillsmatter.com/podcast/groovy-grails/talk-by-tomas-lin
+* Richard Paul - Acceptance Testing via Geb - http://skillsmatter.com/podcast/agile-testing/acceptance-testing-with-geb
+* Craig Atkinson - Geb Groovy Grails Functional Testing - https://github.com/sjurgemeyer/GR8ConfUS2013/blob/master/CraigAtkinson-Geb/Geb_Groovy_Grails_Functional_Testing_Gr8Conf_US_2013_slides.pdf
