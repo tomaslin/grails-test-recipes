@@ -262,6 +262,42 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 
 ##Geb
 
+####Adding a button that pauses Geb via javascript 
+
+```groovy
+   private void pause() {
+       js.exec """
+           (function() {
+               window.__gebPaused = true;
+               var div = document.createElement("div");
+               div.setAttribute('style', "\\
+                   position: absolute; top: 0px;\\
+                   z-index: 3000;\\
+                   padding: 10px;\\
+                   background-color: red;\\
+                   border: 2px solid black;\\
+                   border-radius: 2px;\\
+                   text-align: center;\\
+               ");
+
+               var button = document.createElement("button");
+               button.innerHTML = "Unpause Geb";
+               button.onclick = function() {
+                   window.__gebPaused = false;
+               }
+               button.setAttribute("style", "\\
+                   font-weight: bold;\\
+               ");
+
+               div.appendChild(button);
+               document.getElementsByTagName("body")[0].appendChild(div);
+           })();
+       """
+
+       waitFor(300) { !js.__gebPaused }
+   }
+```
+
 ###Configuring WebDriver
 
 See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
