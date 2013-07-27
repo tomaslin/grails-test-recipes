@@ -257,9 +257,17 @@ where:
 
 IntelliJ won't recognize mixed format so you have to do the data table, format it and then the other values.
 
-##Remote Control
+####Presentations on Spock
+
+* Peter Niederwieser : Spock - the smarter testing and specification framework (Devoxx)
+ http://parleys.com/play/514892260364bc17fc56bdb5/about
+* Rob Fletcher - Groovier Testing with Spock - http://skillsmatter.com/podcast/groovy-grails/groovier-testing-with-spock
+* Luke Daley - Smarter Testing with Spock - http://skillsmatter.com/podcast/java-jee/spock
 
 ##Betamax
+
+####Presentations on Betamax
+* Rob Fletcher - Testing HTTP dependencies with Betamax  http://skillsmatter.com/podcast/groovy-grails/testing-http-dependencies-with-betamax
 
 ##Geb
 
@@ -311,3 +319,4 @@ See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver
 * Tomas Lin - Testing Dynamic Pages with Geb - http://skillsmatter.com/podcast/groovy-grails/talk-by-tomas-lin
 * Richard Paul - Acceptance Testing via Geb - http://skillsmatter.com/podcast/agile-testing/acceptance-testing-with-geb
 * Craig Atkinson - Geb Groovy Grails Functional Testing - https://github.com/sjurgemeyer/GR8ConfUS2013/blob/master/CraigAtkinson-Geb/Geb_Groovy_Grails_Functional_Testing_Gr8Conf_US_2013_slides.pdf
+* Mike Ensor - Writing an Extensible Web Testing Framework ready for the Cloud - http://gr8conf.eu/Presentations/Writing-an-Extensible-Web-Test
