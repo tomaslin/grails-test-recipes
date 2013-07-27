@@ -396,6 +396,23 @@ environments {
 }
 ```
 
+####Inject a js library to the page
+
+Add helper method to Geb base page
+
+```
+def injectLibrary( library ){
+     js.exec("document.body.appendChild(document.createElement('script')).src='$library'"); 
+}
+```
+
+Call in page that needs injection
+
+```
+injectLibrary( 'http://sinonjs.org/releases/sinon-1.4.2.js' )
+
+```
+
 ####Configuring WebDriver
 
 See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
