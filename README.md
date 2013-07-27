@@ -307,6 +307,65 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
    }
 ```
 
+####Extend your own elements by providing your own navigators
+
+Provide your own class for empty and nonempty navigators
+```
+class NonEmptyNavigator extends geb.navigator.NonEmptyNavigator {
+    NonEmptyNavigator(Browser browser, Collection<? extends WebElement> contextElements) {
+        super(browser, contextElements)
+    }
+
+    boolean isDirty() {
+        hasClass 'dirty'
+    }
+
+    boolean isHidden() {
+        hasClass 'hidden'
+    }
+}
+```
+
+Add this to GebConfig
+
+```
+innerNavigatorFactory = { Browser browser, List<WebElement> elements ->
+    elements ? new NonEmptyNavigator(browser, elements) : new EmptyNavigator(browser)
+}
+```
+
+####Handling css transitions
+
+Add this to the nonempty navigator / webkit only
+
+```
+void waitForCssTransition(Closure trigger) {
+        def element = firstElement()
+
+        browser.js.exec(element, '''
+            var o = jQuery(arguments[0]);
+            window.setTransitionFinishedClass = function() {
+                $(this).addClass('transitionFinished');
+            }
+            o.bind('webkitTransitionEnd', window.setTransitionFinishedClass);
+        ''')
+
+        try {
+            trigger.call()
+            browser.waitFor {
+                hasClass('transitionFinished')
+            }
+        } finally {
+            browser.js.exec(element, '''
+                var o = jQuery(arguments[0]);
+                o.removeClass('transitionFinished')
+                o.unbind('webkitTransitionEnd', window.setTransitionFinishedClass);
+                window.setTransitionFinishedClass = undefined;
+            ''')
+        }
+}
+```
+
 ####Configuring WebDriver
 
 See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
