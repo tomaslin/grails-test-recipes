@@ -260,6 +260,8 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 
 ##Remote Control
 
+##Betamax
+
 ##Geb
 
 ####Adding a button that pauses Geb via javascript 
@@ -298,6 +300,6 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
    }
 ```
 
-###Configuring WebDriver
+####Configuring WebDriver
 
 See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
