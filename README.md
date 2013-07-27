@@ -366,6 +366,36 @@ void waitForCssTransition(Closure trigger) {
 }
 ```
 
+####Automatically download chromedriver
+
+Into your gebConfig
+```
+driver = { new FirefoxDriver() }
+
+private void downloadDriver(File file, String path) {
+    if (!file.exists()) {
+        def ant = new AntBuilder()
+        ant.get(src: path, dest: 'driver.zip')
+        ant.unzip(src: 'driver.zip', dest: file.parent)
+        ant.delete(file: 'driver.zip')
+        ant.chmod(file: file, perm: '700')
+    }
+}
+
+environments {
+
+    // run as “grails -Dgeb.env=chrome test-app”
+    // See: http://code.google.com/p/selenium/wiki/ChromeDriver
+    chrome {
+        def chromeDriver = new File('test/drivers/chrome/chromedriver')
+        downloadDriver(chromeDriver, "http://chromedriver.googlecode.com/files/chromedriver_mac_23.0.1240.0.zip")
+        System.setProperty('webdriver.chrome.driver', chromeDriver.absolutePath)
+        driver = { new ChromeDriver() }
+    }
+
+}
+```
+
 ####Configuring WebDriver
 
 See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
