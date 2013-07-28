@@ -451,9 +451,115 @@ injectLibrary( 'http://sinonjs.org/releases/sinon-1.4.2.js' )
 
 ```
 
-####Configuring WebDriver
+####Setting up headless browsing on Jenkins with xvfb
 
-See blog post: http://fbflex.wordpress.com/2013/03/18/how-to-configure-webdriver-in-grails-for-your-geb-tests/
+http://www.labelmedia.co.uk/blog/setting-up-selenium-server-on-a-headless-jenkins-ci-build-machine.html
+
+####Use Sauce Labs
+
+add dependency to buildconfig
+
+```
+test "org.seleniumhq.selenium:selenium-remote-driver:2.31.0"
+```
+
+in GebConfig
+
+```
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.remote.RemoteWebDriver
+driver = {
+   DesiredCapabilities capabilities = DesiredCapabilities.firefox()
+   capabilities.setCapability("version", "17")
+   capabilities.setCapability("platform", "Windows 2012")
+   new RemoteWebDriver(
+     new URL("http://:<access_key>@ondemand.saucelabs.com:80/wd/hub"), capabilities
+   )
+}
+```
+
+####Use PhantomJS via Ghostdriver
+
+In BuildConfig
+
+```
+test( "com.github.detro.ghostdriver:phantomjsdriver:1.0.1" ) {
+   transitive = false
+}
+```
+
+in GebConfig
+
+```
+import org.openqa.selenium.phantomjs.PhantomJSDriver
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.Dimension
+driver = {
+    new PhantomJSDriver(new DesiredCapabilities())
+}
+```
+
+####Switching to a different driver for one Spec
+
+```
+import geb.spock.GebSpec
+import spock.lang.Shared
+import org.openqa.selenium.firefox.FirefoxProfile
+import org.openqa.selenium.firefox.FirefoxDriver
+ 
+class MobileSpeck extends GebSpec {
+ 
+@Shared def cachedDriver
+ 
+def setupSpec(){
+  cachedDriver = new FirefoxDriver()
+}
+ 
+def setup(){
+  // assign this as the default driver on the browser for each test
+  browser.driver = cachedDriver
+}
+ 
+def cleanupSpec(){
+  // after running the spec, kill the driver
+  cachedDriver.quit()
+}
+ 
+}
+```
+
+####Useful WebDriver settings
+
+Fixed Screen Size
+
+```
+import org.openqa.selenium.phantomjs.PhantomJSDriver
+import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.Dimension
+driver = {
+    def d = new PhantomJSDriver(new DesiredCapabilities())
+    d.manage().window().setSize(new Dimension(1028, 768))
+    d
+}
+```
+
+Spoof User Agent in PhantomJS
+
+```
+def capabilities = new DesiredCapabilities()
+capabilities.setCapability("phantomjs.page.settings.userAgent",
+"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML,
+like Gecko) Chrome/27.0.1453.93 Safari/537.36")
+new PhantomJSDriver(capabilities)
+```
+
+Spoof User Agent Firefox
+
+```
+FirefoxProfile profile = new FirefoxProfile();
+profile.setPreference("general.useragent.override", 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.1');
+cachedDriver = new FirefoxDriver(profile)
+```
 
 ####Presentations on Geb
 
