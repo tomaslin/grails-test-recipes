@@ -138,6 +138,112 @@ where set is the shard number and total is the total number of shards.
 
 Be aware that you need to set the environment or it will default to Development. 
 
+Update: There is also grails plugin for test partition - http://grails.org/plugin/partition-tests
+
+####Running tests in parallel (Secret Escapes)
+
+Partitions tests and runs them in different processes
+
+```
+import groovy.sql.*
+import org.codehaus.groovy.grails.test.*
+import org.codehaus.groovy.grails.test.support.*
+import org.codehaus.groovy.grails.test.event.*
+ 
+includeTargets << grailsScript("TestApp")
+ 
+target(main: "Runs functional tests in parallel in sets of bucketSize") {
+    def reportsDir = 'reports'
+    def numberOfServers = 5
+ 
+    def sql = Sql.newInstance('jdbc:mysql://localhost:3306/', 'root', '', 'com.mysql.jdbc.Driver')
+ 
+    def tests = new SpecFinder(binding).getTestClassNames()
+    new File(reportsDir).mkdirs()
+    def commands = []
+    def threads = []
+    def results = ''
+ 
+    numberOfServers.times { id ->
+ 
+        def reportsFile = new File(reportsDir + '/' + 'test' + id).absolutePath
+ 
+        sql.execute( "DROP DATABASE IF EXISTS parallelDB${id};" )
+        sql.execute( "CREATE DATABASE parallelDB${id};" )
+ 
+        def pattern = ''
+ 
+        tests.eachWithIndex { test, index ->
+ 
+            if (index % numberOfServers == id)
+            {
+                pattern += " ${ tests.get(index) }"
+            }
+ 
+        }
+ 
+        def command = "grails -Dgrails.project.test.reports.dir=${reportsFile} -Dserver.port=909${id} -Ddb.name=parallelDB${id} test-app functional:  ${pattern}"
+ 
+        threads << Thread.start {
+ 
+            println command
+            ProcessBuilder builder = new ProcessBuilder(command.split(' '));
+ 
+            builder.redirectErrorStream(true);
+            Process process = builder.start();
+ 
+            InputStream stdout = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
+ 
+            while ((line = reader.readLine()) != null)
+            {
+                if( !line.contains( 'buildtestdata.DomainInstanceBuilder' ) ){
+                    System.out.println("Server ${id}: " + line);
+                }
+ 
+                if( line.contains( 'Tests passed:' ) || line.contains( 'Tests failed:' ) ){
+                    results += "Server ${id}: " + line + '\n'
+                }
+            }
+ 
+        }
+ 
+    }
+ 
+    threads.each {
+        it.join()
+    }
+ 
+    println '------------------------------------'
+    println 'Tests FINISHED'
+    println '------------------------------------'
+    println results
+ 
+}
+ 
+setDefaultTarget(main)
+ 
+class SpecFinder extends GrailsTestTypeSupport {
+ 
+    SpecFinder(binding) {
+        super('name', 'functional')
+        buildBinding = binding
+    }
+ 
+    int doPrepare() {
+        0
+    }
+ 
+    GrailsTestTypeResult doRun(GrailsTestEventPublisher eventPublisher) {
+        null
+    }
+ 
+    def getTestClassNames() {
+        findSourceFiles(new GrailsTestTargetPattern('**.*Spec')).sort{ -it.length() }.collect{ sourceFileToClassName(it) }
+    }
+}
+```
+
 ##Spock 
 
 ( Mostly from: http://docs.spockframework.org/en/latest )
@@ -425,7 +531,6 @@ SignedInPage login( String username, String password ){
 
 In your tests, you call
 
-
 ```
 when:
   Homepage homepage = to(HomePage)
@@ -569,6 +674,10 @@ FirefoxProfile profile = new FirefoxProfile();
 profile.setPreference("general.useragent.override", 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.1');
 cachedDriver = new FirefoxDriver(profile)
 ```
+
+####Hybrid model: add Sikuli to geb tests for things Geb can't deal with like File upload dialogs or system interactions.
+
+http://fbflex.wordpress.com/2012/10/27/geb-and-sikuli/
 
 ####Presentations on Geb
 
