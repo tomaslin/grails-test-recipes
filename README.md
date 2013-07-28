@@ -377,6 +377,9 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 
 ##Geb
 
+####Book of Geb
+http://www.gebish.org/manual/current/
+
 ####Adding a button that pauses Geb via javascript (Luke Daley)
 
 ```groovy
