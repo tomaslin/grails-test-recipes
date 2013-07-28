@@ -393,7 +393,45 @@ environments {
         driver = { new ChromeDriver() }
     }
 
+```
+
+####Page Builder Pattern (Craig Atkinson)
+
+Helps make tests more explicit by having helper methods always return the actual page. 
+
+Instead of
+
+``` 
+to HomePage 
+loginButton.click()
+```
+
+make it
+
+```
+Homepage homepage = to(HomePage)
+homepage.loginButton.click()
+```
+
+all helper methods should return the page as the last argument
+
+```
+SignedInPage login( String username, String password ){
+      // code here
+      at SignedInPage
+      browser.page
 }
+```
+
+In your tests, you call
+
+
+```
+when:
+  Homepage homepage = to(HomePage)
+  SignedInPage signedInPage = login( 'bob', 'password' )
+then:
+  signedInPage.displayedUsername == 'Bob Marley'
 ```
 
 ####Inject a js library to the page
