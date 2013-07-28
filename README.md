@@ -271,7 +271,7 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 
 ##Geb
 
-####Adding a button that pauses Geb via javascript 
+####Adding a button that pauses Geb via javascript (Luke Daley)
 
 ```groovy
    private void pause() {
@@ -307,7 +307,7 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
    }
 ```
 
-####Extend your own elements by providing your own navigators
+####Extend your own elements by providing your own navigators (Sky)
 
 Provide your own class for empty and nonempty navigators
 ```
@@ -334,7 +334,7 @@ innerNavigatorFactory = { Browser browser, List<WebElement> elements ->
 }
 ```
 
-####Handling css transitions
+####Handling css transitions (Sky)
 
 Add this to the nonempty navigator / webkit only
 
@@ -366,7 +366,7 @@ void waitForCssTransition(Closure trigger) {
 }
 ```
 
-####Automatically download chromedriver
+####Automatically download chromedriver (Sky)
 
 Into your gebConfig
 ```
