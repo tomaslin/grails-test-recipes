@@ -528,6 +528,15 @@ def cleanupSpec(){
 }
 ```
 
+####Grails polydriver plugin (Object Partners)
+
+Set up multiple drivers and define preferred driver for one spec
+http://www.objectpartners.com/2013/05/05/poly-driver-a-phantom-band-aid-for-geb/
+
+####Run Javascript tests in Sauce Labs via Geb (Object Partners)
+
+http://www.objectpartners.com/2013/04/18/multi-browser-javascript-unit-testing-with-sauce/
+
 ####Useful WebDriver settings
 
 Fixed Screen Size
