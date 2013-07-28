@@ -648,6 +648,11 @@ http://blog.proxerd.pl/article/resizing-browser-window-in-geb-tests
 ####Manipulating time with Sinon
 http://blog.proxerd.pl/article/mocking-browser-timers-in-geb-tests
 
+####Modelling repeated structures with Geb
+http://adhockery.blogspot.co.uk/2010/11/modelling-repeating-structures-with-geb.html
+
+Update: Also use ModuleList - http://www.gebish.org/manual/0.9.0/modules.html#using_modules_for_repeating_content_on_a_page
+
 ####Useful WebDriver settings
 
 Fixed Screen Size
