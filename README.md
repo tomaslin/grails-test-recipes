@@ -642,6 +642,12 @@ http://www.objectpartners.com/2013/05/05/poly-driver-a-phantom-band-aid-for-geb/
 
 http://www.objectpartners.com/2013/04/18/multi-browser-javascript-unit-testing-with-sauce/
 
+####Changing window sizes for tests (Marcin Erdmann)
+http://blog.proxerd.pl/article/resizing-browser-window-in-geb-tests
+
+####Manipulating time with Sinon
+http://blog.proxerd.pl/article/mocking-browser-timers-in-geb-tests
+
 ####Useful WebDriver settings
 
 Fixed Screen Size
