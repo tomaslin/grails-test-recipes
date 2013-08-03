@@ -244,6 +244,39 @@ class SpecFinder extends GrailsTestTypeSupport {
 }
 ```
 
+##Taglibs
+
+####Mocking a view in unit tests 
+
+```groovy
+void "constraints are passed to template"() {
+    	given:
+		views["/_fields/default/_field.gsp"] = 'nullable=${constraints.nullable}, blank=${constraints.blank}'
+
+		expect:
+		applyTemplate('<f:field bean="personInstance" property="name"/>', [personInstance: personInstance]) == "nullable=false, blank=false"
+}
+```
+
+####Setting pageScope variables
+
+```groovy
+void testTagThatAccessesPageScope() {
+        tagLib.pageScope.food = 'tacos'
+        tagLib.tagThatAccessesPageScope([:])
+        assertEquals 'food is tacos', tagLib.out.toString()
+    }
+}
+
+class PagePropertyTagLib {
+    
+    def tagThatAccessesPageScope = {
+        out << "food is ${pageScope.food}"
+    }
+
+}
+```
+
 ##Spock 
 
 ( Mostly from: http://docs.spockframework.org/en/latest )
