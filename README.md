@@ -292,6 +292,10 @@ then:
 
 ####Changing label formatting in IntelliJ Idea
 
+####Generate business friendly test run report
+
+Spock subproject - https://github.com/spockframework/spock/tree/groovy-1.8/spock-report
+
 ####Generate a HTML report based on labels
 
 Project on github - https://github.com/chanwit/spock-report-html
@@ -316,7 +320,7 @@ Project on github - https://github.com/chanwit/spock-report-html
 
 Follow Luke Daley's guide at http://ldaley.com/post/971946675/annotation-driven-extensions-with-spock
 
-###Data Tables
+###Working with Data - Data Tables
 
 ####One column where clauses
 ```groovy
@@ -395,6 +399,10 @@ where:
 ```
 
 IntelliJ won't recognize mixed format so you have to do the data table, format it and then the other values.
+
+###Mocking
+
+
 
 ####Presentations on Spock
 
