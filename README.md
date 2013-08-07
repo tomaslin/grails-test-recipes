@@ -476,6 +476,16 @@ innerNavigatorFactory = { Browser browser, List<WebElement> elements ->
 }
 ```
 
+####Getting Raw HTML for an element
+
+in your custom Navigator
+
+```
+ String rawHtml() {
+        browser.js.exec(firstElement(), "return arguments[0].innerHTML;")
+    }
+```
+
 ####Handling css transitions (Sky)
 
 Add this to the nonempty navigator / webkit only
