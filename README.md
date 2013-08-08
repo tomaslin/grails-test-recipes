@@ -280,6 +280,29 @@ class PagePropertyTagLib {
 
 ( Mostly from: http://docs.spockframework.org/en/latest )
 
+####Configuration ( Next level spock )
+
+Spock has a configuration API.
+
+Looks for (in order)…
+
+-Dspock.configuration=path/to/file
+SpockConfig.groovy file on class path
+~/.spock/SpockConfig.groovy
+
+```
+runner {
+    filterStackTrace true
+    optimizeRunOrder false
+    include Database
+    exclude UI
+}
+```
+
+
+
+
+
 ####Compare with previous value using old()
 
 ```groovy
@@ -430,6 +453,21 @@ where:
 
 IntelliJ won't recognize mixed format so you have to do the data table, format it and then the other values.
 
+####Parameter Typing
+You can add type information to the method (for IDE support).
+
+```groovy
+def "some math"(Integer a, Integer b, Integer c) {
+    expect:
+    a + b == c
+
+    where:
+    a | b || c
+    1 | 1 || 2
+    5 | 5 || 10
+}
+```
+
 ###Mocking
 
 ####Declarations can be chained
@@ -477,6 +515,7 @@ def spy = GroovySpy(Person, global:true)
  http://parleys.com/play/514892260364bc17fc56bdb5/about
 * Rob Fletcher - Groovier Testing with Spock - http://skillsmatter.com/podcast/groovy-grails/groovier-testing-with-spock
 * Luke Daley - Smarter Testing with Spock - http://skillsmatter.com/podcast/java-jee/spock
+* Next Level Spock (Luke Daley) - https://github.com/spockframework/spock-talks/tree/master/talks/next-level/src/slides
 
 ##Betamax
 
