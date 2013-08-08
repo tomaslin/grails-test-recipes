@@ -348,34 +348,7 @@ then:
 expect x, closeTo(42, 0.01)
 ```
 
-Useful list of Hamcrest Matchers ( from https://code.google.com/p/hamcrest/wiki/Tutorial )
-
-Logical
-allOf - matches if all matchers match, short circuits (like Java &&)
-anyOf - matches if any matchers match, short circuits (like Java ||)
-not - matches if the wrapped matcher doesn't match and vice versa
-
-Object
-equalTo - test object equality using Object.equals
-hasToString - test Object.toString
-instanceOf, isCompatibleType - test type
-notNullValue, nullValue - test for null
-sameInstance - test object identity
-
-Collections
-array - test an array's elements against an array of matchers
-hasEntry, hasKey, hasValue - test a map contains an entry, key or value
-hasItem, hasItems - test a collection contains elements
-hasItemInArray - test an array contains an element
-
-Number
-closeTo - test floating point values are close to a given value
-greaterThan, greaterThanOrEqualTo, lessThan, lessThanOrEqualTo - test ordering
-
-Text
-equalToIgnoringCase - test string equality ignoring case
-equalToIgnoringWhiteSpace - test string equality ignoring differences in runs of whitespace
-containsString, endsWith, startsWith - test string matching
+Useful list of Hamcrest Matchers - https://code.google.com/p/hamcrest/wiki/Tutorial
 
 ###Working with Data - Data Tables
 
