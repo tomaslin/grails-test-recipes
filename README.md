@@ -61,7 +61,6 @@ To disable this functionality, modify the BuildConfig.groovy file and change the
 ####Printing out which tests are running
 
 Add the following script to scripts/_Events.groovy
-
 ```groovy
 eventTestCaseStart = { name ->
     println '-' * 60
@@ -144,7 +143,7 @@ Update: There is also grails plugin for test partition - http://grails.org/plugi
 
 Partitions tests and runs them in different processes
 
-```
+```groovy
 import groovy.sql.*
 import org.codehaus.groovy.grails.test.*
 import org.codehaus.groovy.grails.test.support.*
@@ -316,9 +315,38 @@ Project on github - https://github.com/chanwit/spock-report-html
 * @AutoCleanup - allows a named cleaning up/closing method to be automatically called by Spock on a field
 * @FailsWith - makes a feature pass only if it raises a certain exception and it’s uncaught
 
+Annotations like @Unroll and @Timeout can be applied to the spec level.
+
 ####Make your own extensions
 
 Follow Luke Daley's guide at http://ldaley.com/post/971946675/annotation-driven-extensions-with-spock
+
+####Hamcrest Matchers
+
+```groovy
+import static spock.util.matcher.HamcrestSupport.that
+
+expect:
+that answer, closeTo(42, 0.001)
+```
+
+You can also use hamcrest matchers to constraint method arguments
+
+```groovy
+import static spock.util.matcher.HamcrestMatchers.closeTo
+
+1 * foo.bar(closeTo(42, 0.001))
+```
+
+In then methods, you can use 'expect' for better readability
+
+```
+when:
+def x = computeValue()
+
+then:
+expect x, closeTo(42, 0.01)
+```
 
 ###Working with Data - Data Tables
 
@@ -402,7 +430,44 @@ IntelliJ won't recognize mixed format so you have to do the data table, format i
 
 ###Mocking
 
+####Declarations can be chained
 
+```groovy
+foo.bar() >> { throw new IOException() } >>> [1, 2, 3] >> { throw new RuntimeException() }
+```
+
+####You can group Interactions together with the 'with' keyword
+
+```groovy
+def service = Mock(Service)
+app.service = service
+
+when:
+app.run()
+
+then:
+with(service) {
+    1 * start()
+    1 * act()
+    1 * stop()
+}
+```
+
+####Groovy mocks
+
+If you have dynamic methods, use the groovy version of mocks and stubs,
+
+```
+def mock = GroovyMock(Person)
+def stub = GroovyStub(Person)
+def spy = GroovySpy(Person)
+```
+
+They can also be made global
+
+```
+def spy = GroovySpy(Person, global:true)
+```
 
 ####Presentations on Spock
 
@@ -460,7 +525,7 @@ http://www.gebish.org/manual/current/
 ####Extend your own elements by providing your own navigators (Sky)
 
 Provide your own class for empty and nonempty navigators
-```
+```groovy
 class NonEmptyNavigator extends geb.navigator.NonEmptyNavigator {
     NonEmptyNavigator(Browser browser, Collection<? extends WebElement> contextElements) {
         super(browser, contextElements)
@@ -478,7 +543,7 @@ class NonEmptyNavigator extends geb.navigator.NonEmptyNavigator {
 
 Add this to GebConfig
 
-```
+```groovy
 innerNavigatorFactory = { Browser browser, List<WebElement> elements ->
     elements ? new NonEmptyNavigator(browser, elements) : new EmptyNavigator(browser)
 }
@@ -488,7 +553,7 @@ innerNavigatorFactory = { Browser browser, List<WebElement> elements ->
 
 in your custom Navigator
 
-```
+```groovy
  String rawHtml() {
         browser.js.exec(firstElement(), "return arguments[0].innerHTML;")
     }
@@ -498,7 +563,7 @@ in your custom Navigator
 
 Add this to the nonempty navigator / webkit only
 
-```
+```groovy
 void waitForCssTransition(Closure trigger) {
         def element = firstElement()
 
@@ -529,7 +594,7 @@ void waitForCssTransition(Closure trigger) {
 ####Automatically download chromedriver (Sky)
 
 Into your gebConfig
-```
+```groovy
 driver = { new FirefoxDriver() }
 
 private void downloadDriver(File file, String path) {
@@ -561,21 +626,21 @@ Helps make tests more explicit by having helper methods always return the actual
 
 Instead of
 
-``` 
+```groovy 
 to HomePage 
 loginButton.click()
 ```
 
 make it
 
-```
+```groovy
 Homepage homepage = to(HomePage)
 homepage.loginButton.click()
 ```
 
 all helper methods should return the page as the last argument
 
-```
+```groovy
 SignedInPage login( String username, String password ){
       // code here
       at SignedInPage
@@ -585,7 +650,7 @@ SignedInPage login( String username, String password ){
 
 In your tests, you call
 
-```
+```groovy
 when:
   Homepage homepage = to(HomePage)
   SignedInPage signedInPage = login( 'bob', 'password' )
@@ -597,7 +662,7 @@ then:
 
 Add helper method to Geb base page
 
-```
+```groovy
 def injectLibrary( library ){
      js.exec("document.body.appendChild(document.createElement('script')).src='$library'"); 
 }
@@ -605,7 +670,7 @@ def injectLibrary( library ){
 
 Call in page that needs injection
 
-```
+```groovy
 injectLibrary( 'http://sinonjs.org/releases/sinon-1.4.2.js' )
 
 ```
@@ -618,13 +683,13 @@ http://www.labelmedia.co.uk/blog/setting-up-selenium-server-on-a-headless-jenkin
 
 add dependency to buildconfig
 
-```
+```groovy
 test "org.seleniumhq.selenium:selenium-remote-driver:2.31.0"
 ```
 
 in GebConfig
 
-```
+```groovy
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
 driver = {
@@ -641,7 +706,7 @@ driver = {
 
 In BuildConfig
 
-```
+```groovy
 test( "com.github.detro.ghostdriver:phantomjsdriver:1.0.1" ) {
    transitive = false
 }
@@ -649,7 +714,7 @@ test( "com.github.detro.ghostdriver:phantomjsdriver:1.0.1" ) {
 
 in GebConfig
 
-```
+```groovy
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.Dimension
@@ -660,7 +725,7 @@ driver = {
 
 ####Switching to a different driver for one Spec
 
-```
+```groovy
 import geb.spock.GebSpec
 import spock.lang.Shared
 import org.openqa.selenium.firefox.FirefoxProfile
@@ -711,7 +776,7 @@ Update: Also use ModuleList - http://www.gebish.org/manual/0.9.0/modules.html#us
 
 Fixed Screen Size
 
-```
+```groovy
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.Dimension
@@ -724,7 +789,7 @@ driver = {
 
 Spoof User Agent in PhantomJS
 
-```
+```groovy
 def capabilities = new DesiredCapabilities()
 capabilities.setCapability("phantomjs.page.settings.userAgent",
 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML,
@@ -734,7 +799,7 @@ new PhantomJSDriver(capabilities)
 
 Spoof User Agent Firefox
 
-```
+```groovy
 FirefoxProfile profile = new FirefoxProfile();
 profile.setPreference("general.useragent.override", 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.1');
 cachedDriver = new FirefoxDriver(profile)
