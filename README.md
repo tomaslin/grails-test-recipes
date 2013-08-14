@@ -509,6 +509,10 @@ They can also be made global
 def spy = GroovySpy(Person, global:true)
 ```
 
+####Testing Domain Class Constraints with Spock
+
+http://www.christianoestreich.com/2012/11/domain-constraints-grails-spock-updated/
+
 ####Presentations on Spock
 
 * Peter Niederwieser : Spock - the smarter testing and specification framework (Devoxx)
