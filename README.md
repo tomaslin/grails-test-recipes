@@ -850,6 +850,10 @@ profile.setPreference("general.useragent.override", 'Mozilla/5.0 (iPhone; U; CPU
 cachedDriver = new FirefoxDriver(profile)
 ```
 
+Accessing SSL Certificates
+
+http://onekilo79.wordpress.com/2013/08/17/groovy-with-geb-using-phantomjs-and-ssl-certs/
+
 ####Hybrid model: add Sikuli to geb tests for things Geb can't deal with like File upload dialogs or system interactions.
 
 http://fbflex.wordpress.com/2012/10/27/geb-and-sikuli/
