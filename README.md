@@ -276,6 +276,11 @@ class PagePropertyTagLib {
 }
 ```
 
+Testing Grails
+
+Colin Harrington - Testing Grails : Experiences from the field - http://springone2gx.com/s/slides/2011/speaker/Colin_Harrington/testing_grails___experiencies_from_the_field/grails_testing.pdf
+Colin Harrington - Grails testing seminar : http://www.youtube.com/watch?v=RZlXFR013hg
+
 ##Spock 
 
 ( Mostly from: http://docs.spockframework.org/en/latest )
@@ -519,7 +524,8 @@ http://www.christianoestreich.com/2012/11/domain-constraints-grails-spock-update
  http://parleys.com/play/514892260364bc17fc56bdb5/about
 * Rob Fletcher - Groovier Testing with Spock - http://skillsmatter.com/podcast/groovy-grails/groovier-testing-with-spock
 * Luke Daley - Smarter Testing with Spock - http://skillsmatter.com/podcast/java-jee/spock
-* Next Level Spock (Luke Daley) - https://github.com/spockframework/spock-talks/tree/master/talks/next-level/src/slides
+* Next Level Spock (Luke Daley) - http://springone2gx.com/s/slides/2012/speaker/Luke_Daley/next_level_spock/slides.pdf
+* Ken Kousen - Spock : Logical testing for the enterprise - SpringOne2GX 2013 - http://springone2gx.com/s/slides/2013/speaker/Kenneth_Kousen/spock_logical_testing_for_enterprise_applications/Spock_Friendly_Testing.pdf
 
 ##Betamax
 
