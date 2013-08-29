@@ -276,10 +276,11 @@ class PagePropertyTagLib {
 }
 ```
 
-Testing Grails
+###Testing Grails
 
 Colin Harrington - Testing Grails : Experiences from the field - http://springone2gx.com/s/slides/2011/speaker/Colin_Harrington/testing_grails___experiencies_from_the_field/grails_testing.pdf
 Colin Harrington - Grails testing seminar : http://www.youtube.com/watch?v=RZlXFR013hg
+How to Make your Testing more Groovy - http://www.slideshare.net/smithcdau/how-to-make-your-testing-more-groovy
 
 ##Spock 
 
