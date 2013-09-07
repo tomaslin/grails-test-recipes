@@ -379,6 +379,19 @@ expect x, closeTo(42, 0.01)
 
 Useful list of Hamcrest Matchers - https://code.google.com/p/hamcrest/wiki/Tutorial
 
+####Parameter Typing
+You can add type information to the method (for IDE support).
+
+
+```groovy
+def "some math"(Integer a, Integer b, Integer c) {
+ expect:
+ a + b == c
+ where:...
+}
+
+```
+
 ###Working with Data - Data Tables
 
 ####One column where clauses
