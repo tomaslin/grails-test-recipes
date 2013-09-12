@@ -51,6 +51,7 @@ open test-report
 
 ####Grails test Cheatsheet
 http://zanthrash.com/grailstesting/UnitTestingCheatSheet.pdf
+http://slid.es/colinharrington/testing-grails
 
 ####Configuring the test daemon
 The test deamon in the grails shell exists in 2.3.x branches to make running of the tests faster. This is similar to the gradle daemon. 
