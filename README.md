@@ -884,6 +884,7 @@ http://fbflex.wordpress.com/2012/10/27/geb-and-sikuli/
 
 ####Presentations on Geb
 
+* Marcin Erdmann - Advanced Geb - http://skillsmatter.com/event-details/home/advanced-geb
 * Luke Daley - The evolution of Geb - http://skillsmatter.com/podcast/home/the-evolution-of-an-open-source-projects-build-automation
 * Luke Daley - Productive Grails functional testing - http://skillsmatter.com/podcast/home/productive-grails-functional-testing
 * Luke Daley - Very Groovy Browser Automation - http://www.youtube.com/watch?v=T2qXCBT_QBs 
